@@ -11,7 +11,10 @@
     "list": "ignite-andross",
     "redux": "ignite-andross",
     "saga": "ignite-andross",
-    "screen": "ignite-andross"
+    "screen": "ignite-andross",
+    "map": "ignite-maps",
+    "map-utilities": "ignite-maps",
+    "map-callout": "ignite-maps"
   },
   "boilerplateVersion": "4.0.5"
 }
