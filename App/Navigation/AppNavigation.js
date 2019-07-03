@@ -1,5 +1,5 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import RestaurantList from '../Containers/RestaurantList'
+import RestaurantListScreen from '../Containers/RestaurantListScreen'
 import RestaurantLocator from '../Containers/RestaurantLocator'
 import LaunchScreen from '../Containers/LaunchScreen'
 
@@ -7,7 +7,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
-  RestaurantList: { screen: RestaurantList },
+  RestaurantListScreen: { screen: RestaurantListScreen },
   RestaurantLocator: { screen: RestaurantLocator },
   LaunchScreen: { screen: LaunchScreen }
 }, {

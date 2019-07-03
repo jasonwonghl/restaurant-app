@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { TabViewAnimated, TabBar } from 'react-native-tab-view'
+import { Text, View, Dimensions, StyleSheet } from 'react-native'
+import { TabView, SceneMap } from 'react-native-tab-view'
 
-import { Images } from '../Themes'
+import RestaurantListScreen from '../Containers/RestaurantListScreen';
+import RestaurantLocator from './RestaurantLocator';
+
+const FirstRoute = () => (
+  <RestaurantListScreen />
+);
+
+const SecondRoute = () => (
+  <RestaurantLocator />
+);
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -25,8 +34,8 @@ export default class LaunchScreen extends Component {
     this.state = {
       index: 0,
       routes: [
-        { key: '1', title: 'List' },
-        { key: '2', title: 'Map' },
+        { key: 'first', title: 'List' },
+        { key: 'second', title: 'Map' },
       ],
     };  
   }
@@ -56,15 +65,15 @@ export default class LaunchScreen extends Component {
 
   render () {
     return (
-      <View style={styles.mainContainer}>
-        <TabViewAnimated
-          style={pageStyles.container}
-          navigationState={this.state}
-          renderScene={this._renderScene}
-          renderHeader={this._renderHeader}
-          onRequestChangeTab={this._handleChangeTab}
-        />
-      </View>
+      <TabView
+        navigationState={this.state}
+        renderScene={SceneMap({
+          first: FirstRoute,
+          second: SecondRoute,
+        })}
+        onIndexChange={index => this.setState({ index })}
+        initialLayout={{ width: Dimensions.get('window').width }}
+      />
     )
   }
 }

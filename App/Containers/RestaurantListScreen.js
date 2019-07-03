@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/RestaurantListStyle'
 
-class RestaurantList extends React.PureComponent {
+class RestaurantListScreen extends React.PureComponent {
   /* ***********************************************************
   * STEP 1
   * This is an array of objects with the properties you desire
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantList)
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantListScreen)
