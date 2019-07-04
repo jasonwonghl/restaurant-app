@@ -8,10 +8,10 @@ export default StyleSheet.create({
     backgroundColor: Colors.background
   },
   row: {
+    flexDirection: 'row',
     flex: 1,
-    backgroundColor: Colors.fire,
+    backgroundColor: Colors.purple,
     marginVertical: Metrics.smallMargin,
-    justifyContent: 'center',
     margin: 10,
     padding: 5,
     paddingVertical: 10,
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     color: Colors.snow,
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: Metrics.smallMargin
   },
   label: {

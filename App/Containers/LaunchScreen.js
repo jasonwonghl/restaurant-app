@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, Dimensions, StyleSheet } from 'react-native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 
-import RestaurantListScreen from '../Containers/RestaurantListScreen';
-import RestaurantLocator from './RestaurantLocator';
+import RestaurantListScreen from '../Containers/RestaurantListScreen'
+import RestaurantLocator from './RestaurantLocator'
 
 const FirstRoute = () => (
   <RestaurantListScreen />
@@ -14,7 +14,7 @@ const SecondRoute = () => (
 );
 
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+// import styles from './Styles/LaunchScreenStyles';
 
 const pageStyles = StyleSheet.create({
   container: {
@@ -34,8 +34,8 @@ export default class LaunchScreen extends Component {
     this.state = {
       index: 0,
       routes: [
-        { key: 'first', title: 'List' },
-        { key: 'second', title: 'Map' },
+        { key: 'first', title: 'Restaurants' },
+        { key: 'second', title: 'Locations' },
       ],
     };  
   }
@@ -46,21 +46,6 @@ export default class LaunchScreen extends Component {
 
   _renderHeader = (props) => {
     return <TabBar {...props} />;
-  }
-
-  _renderScene = ({ route }) => {
-    switch (route.key) {
-      case '1':
-        return <View style={[ pageStyles.page, { backgroundColor: '#ff4081' } ]}>
-          <Text>Hello from Tab View 1</Text>
-        </View>
-      case '2':
-        return <View style={[ pageStyles.page, { backgroundColor: '#673ab7' } ]}>
-          <Text>Hello from Tab View 2</Text>
-        </View>
-      default:
-        return null;
-      }
   }
 
   render () {
