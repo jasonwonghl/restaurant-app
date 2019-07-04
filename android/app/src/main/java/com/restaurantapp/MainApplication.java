@@ -12,6 +12,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
             new MapsPackage(),
-            new ReanimatedPackage()
+            new ReanimatedPackage(),
+            new ReactNativeConfigPackage()
       );
     }
 
