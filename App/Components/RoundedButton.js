@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Text } from 'react-native'
 import styles from './Styles/RoundedButtonStyles'
@@ -17,7 +17,7 @@ ExamplesRegistry.addComponentExample('Rounded Button', () =>
   />
 )
 
-export default class RoundedButton extends Component {
+export default class RoundedButton extends PureComponent {
   static propTypes = {
     onPress: PropTypes.func,
     text: PropTypes.string,

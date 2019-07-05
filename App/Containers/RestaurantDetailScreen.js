@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { Rating } from 'react-native-ratings'
 import { Images } from '../../ignite/DevScreens/DevTheme'
 
 // Styles
@@ -20,15 +21,25 @@ export default class RestaurantDetailScreen extends React.Component {
         }}>
           <Image source={Images.closeButton} />
         </TouchableOpacity>
+
         <ScrollView showsVerticalScrollIndicator={false} bounces={false} style={styles.container}>
           <View style={styles.centered}>
-            <Image source={{ uri: imageURI }} style={styles.logo} />
+            <Image source={{ uri: imageURI }} style={{width: '100%'}} />
           </View>
 
-          <Text style={styles.sectionText}>{item.name}</Text>
-          <Text style={styles.sectionText}>Price: ('$').repeat({item.price})</Text>
-          <Text style={styles.sectionText}>Rating: {item.rating}</Text>
-          <Text style={styles.sectionText}>{item.formatted_address}</Text>
+          <Text style={styles.titleText}>{item.name}</Text>
+          <Text>{`Price:` + ('$').repeat(item.price)}</Text>
+          <Rating
+            startingValue={item.rating}
+            ratingCount={5}
+            showRating={true}
+            fractions={2}
+            imageSize={20}
+            type='custom'
+            ratingBackgroundColor='#3A233D'
+            tintColor='#3A233D'
+          />
+          <Text>{item.formatted_address}</Text>
         </ScrollView>
       </View>
     )

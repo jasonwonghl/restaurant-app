@@ -36,7 +36,14 @@ const create = (baseURL = Secrets.API_URL) => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const getRestaurants = () => api.get('place/textsearch/json?query=singapore+restaurants&sensor=false&key=' + Secrets.GOOGLE_MAPS_API_KEY)
+  const getRestaurants = (pagetoken) => {
+    if(pagetoken) {
+      console.log('page token available')
+      return api.get('place/textsearch/json?query=singapore+restaurants&sensor=false&pagetoken=' + pagetoken + '&key=' + Secrets.GOOGLE_MAPS_API_KEY)
+    } else {
+      return api.get('place/textsearch/json?query=singapore+restaurants&sensor=false&key=' + Secrets.GOOGLE_MAPS_API_KEY)
+    }
+  }
 
   // ------
   // STEP 3

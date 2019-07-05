@@ -1,46 +1,22 @@
 import React from 'react'
-import { View, Text, Image, FlatList } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import Secrets from 'react-native-config'
-import RoundedButton from '../../App/Components/RoundedButton'
-import DevScreensButton  from '../../ignite/DevScreens/DevscreensButton'
-import RestaurantDetailButton from '../Components/RestaurantDetailButton'
 
+// Redux
 import RestaurantsActions, { fetchRestaurants } from '../Redux/RestaurantsRedux'
+
+// Components
+import RestaurantItem from '../Components/RestaurantItem'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
 
 // Styles
 import styles from './Styles/RestaurantListStyle'
 
+// Constants
+const onEndReachedThreshold = .7;
+
 class RestaurantListScreen extends React.PureComponent {
-
-  renderRow ({item}) {
-    //console.log(Secrets.PHOTO_URL + '?maxwidth=400&photoreference=' + item.photos[0].photo_reference + '&key=' + Secrets.GOOGLE_MAPS_API_KEY)
-
-    const imageURI = Secrets.PHOTO_URL + '?maxwidth=400&photoreference=' + item.photos[0].photo_reference + '&key=' + Secrets.GOOGLE_MAPS_API_KEY;
-
-    return (
-      <View style={styles.row}>
-        <View style={{flex: 1, margin: 5}}>
-          <Image
-          style={{width: 89, height: 90}}
-          resizeMode="cover"
-          source={{ uri: imageURI }}
-        />
-        </View>
-        <View style={{flex: 3}}>
-          <Text style={styles.boldLabel}>{item.name}</Text>
-          <Text style={styles.label}>{item.formatted_address}</Text>
-          <View style={styles.row}>
-            <RestaurantDetailButton item={item} imageURI={imageURI} />
-            <RoundedButton>View On Map</RoundedButton>
-          </View>
-        </View>
-      </View>
-    )
-  }
-  
   renderEmpty = () =>
     <Text style={styles.label}> - Nothing to See Here - </Text>
 
@@ -50,7 +26,7 @@ class RestaurantListScreen extends React.PureComponent {
   keyExtractor = (item, index) => `${index}`
 
   // How many items should be kept im memory as we scroll?
-  oneScreensWorth = 20
+  oneScreensWorth = 10
 
   // extraData is for anything that is not indicated in data
   // for instance, if you kept "favorites" in `this.state.favs`
@@ -67,19 +43,22 @@ class RestaurantListScreen extends React.PureComponent {
   // )}
 
   componentDidMount = () => {
-    //this.props.fetchRestaurants();
+    //this.props.fetchRestaurants(this.props.NextPageToken);
   }
 
   render () {
     return (
       <View style={styles.container}>
         <FlatList
+          windowSize={11}
           contentContainerStyle={styles.listContent}
           data={this.props.restaurantList}
-          renderItem={this.renderRow}
+          renderItem={({ item }) => <RestaurantItem item={item} handleChangeTab={this.props.handleChangeTab} />}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
           ListEmptyComponent={this.renderEmpty}
+          onEndReached={() => this.props.fetchRestaurants(this.props.nextPageToken)}
+          onEndReachedThreshold={onEndReachedThreshold}
         />
       </View>
     )
@@ -88,14 +67,14 @@ class RestaurantListScreen extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    params: state.restaurants.params,
+    nextPageToken: state.restaurants.nextPageToken,
     restaurantList: state.restaurants.restaurantList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRestaurants: params => {dispatch(fetchRestaurants(params))}
+    fetchRestaurants: nextPageToken => {dispatch(fetchRestaurants(nextPageToken))}
   }
 }
 

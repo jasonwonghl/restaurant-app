@@ -5,8 +5,8 @@ import Api from '../Services/Api';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  restaurantsRequest: ['params'],
-  restaurantsSuccess: ['restaurantList'],
+  restaurantsRequest: ['nextPageToken'],
+  restaurantsSuccess: ['restaurantList', 'nextPageToken'],
   restaurantsFailure: null
 })
 
@@ -16,21 +16,29 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  restaurantList: null,
+  restaurantList: [],
+  test: 'coffee',
   fetching: null,
-  error: null
+  error: null,
+  nextPageToken: null
 })
 
 /* ------------- Initial State ------------- */
 
-export const fetchRestaurants = (params) => {
+export const fetchRestaurants = (nextPageToken) => {
   return (dispatch) => {
 
     const apiClient = new Api.create();
 
-    apiClient.getRestaurants()
+    apiClient.getRestaurants(nextPageToken)
       .then((res) => {
-        dispatch(Creators.restaurantsSuccess(res.data.results))
+        console.log('success', res.data.results.length)
+
+        const nextPageToken = res.data.next_page_token ? res.data.next_page_token : null;
+        
+        if(res.data.results.length >= 1) {
+          dispatch(Creators.restaurantsSuccess(res.data.results, nextPageToken))
+        }
       })
       .catch(err => {
         dispatch(Creators.restaurantsFailure())
@@ -43,17 +51,31 @@ export const fetchRestaurants = (params) => {
 
 // request restaurant data from api
 export const request = (state, { params }) =>
-  state.merge({ fetching: true, restaurantList: null })
+  state.merge({ fetching: true, restaurantList: [] })
 
 // successful api lookup
 export const success = (state, action) => {
-  const { restaurantList } = action
-  return state.merge({ fetching: false, error: null, restaurantList })
+  const { restaurantList, nextPageToken } = action
+
+  // Append new results to existing list
+  let concatArray = [...state.restaurantList, ...restaurantList];
+  
+  // Filter out duplicates
+  keys = ['name'],
+  filtered = concatArray.filter(
+      (s => o => 
+          (k => !s.has(k) && s.add(k))
+          (keys.map(k => o[k]).join('|'))
+      )
+      (new Set)
+  )
+
+  return state.merge({ fetching: false, error: null, restaurantList: filtered, nextPageToken })
 }
 
 // failure
 export const failure = (state) =>
-  state.merge({ fetching: false, error: true, restaurantList: null })
+  state.merge({ fetching: false, error: true, restaurantList: [] })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

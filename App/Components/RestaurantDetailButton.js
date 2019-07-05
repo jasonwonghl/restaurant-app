@@ -3,7 +3,7 @@ import { View, Modal } from 'react-native'
 import RoundedButton from './RoundedButton'
 import RestaurantDetailScreen from '../Containers/RestaurantDetailScreen'
 
-export default class RestaurantDetailButton extends React.Component {
+export default class RestaurantDetailButton extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
