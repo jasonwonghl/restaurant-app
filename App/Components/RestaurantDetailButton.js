@@ -26,7 +26,8 @@ export default class RestaurantDetailButton extends React.PureComponent {
             onRequestClose={this.toggleModal}>
             <RestaurantDetailScreen
                 item={this.props.item}
-                imageURI={this.props.imageURI}
+                onFavourite={this.props.onFavourite}
+                favourites={this.props.favourites}
                 screenProps={{ toggle: this.toggleModal }}
             />
           </Modal>

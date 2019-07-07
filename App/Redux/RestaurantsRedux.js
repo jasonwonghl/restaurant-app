@@ -7,7 +7,8 @@ import Api from '../Services/Api';
 const { Types, Creators } = createActions({
   restaurantsRequest: ['nextPageToken'],
   restaurantsSuccess: ['restaurantList', 'nextPageToken'],
-  restaurantsFailure: null
+  restaurantsFailure: null,
+  restaurantsFavourite: ['favourites']
 })
 
 export const RestaurantsTypes = Types
@@ -17,13 +18,13 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   restaurantList: [],
-  test: 'coffee',
+  favourites: [],
   fetching: null,
   error: null,
   nextPageToken: null
 })
 
-/* ------------- Initial State ------------- */
+/* ------------- Thunk ------------- */
 
 export const fetchRestaurants = (nextPageToken) => {
   return (dispatch) => {
@@ -44,6 +45,12 @@ export const fetchRestaurants = (nextPageToken) => {
         dispatch(Creators.restaurantsFailure())
         console.log(err)
       })
+  }
+}
+
+export const toggleFavourite = (favourites) => {
+  return (dispatch) => {
+    dispatch(Creators.restaurantsFavourite(favourites));
   }
 }
 
@@ -73,6 +80,12 @@ export const success = (state, action) => {
   return state.merge({ fetching: false, error: null, restaurantList: filtered, nextPageToken })
 }
 
+// toggle favourite
+export const favourite = (state, action) => {
+  const { favourites } = action;
+  return state.merge({ favourites });
+}
+
 // failure
 export const failure = (state) =>
   state.merge({ fetching: false, error: true, restaurantList: [] })
@@ -82,5 +95,6 @@ export const failure = (state) =>
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.RESTAURANTS_REQUEST]: request,
   [Types.RESTAURANTS_SUCCESS]: success,
-  [Types.RESTAURANTS_FAILURE]: failure
+  [Types.RESTAURANTS_FAILURE]: failure,
+  [Types.RESTAURANTS_FAVOURITE]: favourite
 })
