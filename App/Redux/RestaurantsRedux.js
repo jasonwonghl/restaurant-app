@@ -33,7 +33,8 @@ export const fetchRestaurants = (nextPageToken) => {
 
     apiClient.getRestaurants(nextPageToken)
       .then((res) => {
-        console.log('success', res.data.results.length)
+        // console.log('success', res.data.results.length)
+        // alert('STATUS:' + res.data.status, 'ERROR MESSAGE:' + res.data.error_message)
 
         const nextPageToken = res.data.next_page_token ? res.data.next_page_token : null;
         
@@ -42,8 +43,9 @@ export const fetchRestaurants = (nextPageToken) => {
         }
       })
       .catch(err => {
+        alert(err)
         dispatch(Creators.restaurantsFailure())
-        console.log(err)
+        // console.log(err)
       })
   }
 }

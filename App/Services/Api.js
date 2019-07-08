@@ -38,7 +38,7 @@ const create = (baseURL = Secrets.API_URL) => {
   //
   const getRestaurants = (pagetoken) => {
     if(pagetoken) {
-      console.log('page token available')
+      // console.log('page token available')
       return api.get('place/textsearch/json?query=singapore+restaurants&sensor=false&pagetoken=' + pagetoken + '&key=' + Secrets.GOOGLE_MAPS_API_KEY)
     } else {
       return api.get('place/textsearch/json?query=singapore+restaurants&sensor=false&key=' + Secrets.GOOGLE_MAPS_API_KEY)
