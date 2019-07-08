@@ -19,7 +19,6 @@ export default StyleSheet.create({
   },
   boldLabel: {
     fontWeight: 'bold',
-    alignSelf: 'center',
     color: Colors.snow,
     textAlign: 'left',
     marginBottom: Metrics.smallMargin
@@ -30,5 +29,11 @@ export default StyleSheet.create({
   },
   listContent: {
     marginTop: Metrics.baseMargin
+  },
+  restaurantItemImage: {
+    width: 89, 
+    height: 90, 
+    margin: 5, 
+    backgroundColor: Colors.eggplant
   }
 })

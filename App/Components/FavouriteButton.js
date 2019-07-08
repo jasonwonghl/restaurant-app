@@ -6,7 +6,7 @@ import styles from './Styles/FavouriteButtonStyles'
 class FavouriteButton extends PureComponent {
   render () {
     return (
-      <TouchableOpacity style={styles.button} onPress={this.props.onFavourite}>
+      <TouchableOpacity style={[styles.button, this.props.styles ? this.props.styles : null]} onPress={this.props.onFavourite}>
         <Image style={styles.buttonImage} source={this.props.favourite ? Images.favouriteSelectedIcon : Images.favouriteIcon} resizeMode="contain" />
       </TouchableOpacity>
     )

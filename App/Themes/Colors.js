@@ -22,6 +22,7 @@ const colors = {
   purple: '#3A233D',
   border: '#483F53',
   banner: '#5F3E63',
+  yellow: '#3A233D',
   text: '#E0D7E5'
 }
 

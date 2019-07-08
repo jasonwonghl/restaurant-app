@@ -16,19 +16,19 @@ export default class RestaurantItem extends PureComponent {
             
         return (
             <View style={styles.row}>
-              <View style={{flex: 1, margin: 5}}>
-                <Image
-                    style={{width: 89, height: 90}}
-                    resizeMode="cover"
-                    source={{ uri: imageURI }}
-                />
-              </View>
+              <Image
+                  style={styles.restaurantItemImage}
+                  resizeMode="cover"
+                  source={{ uri: imageURI }}
+              />
               <View style={{flex: 3}}>
                 <FavouriteButton 
                   onFavourite={ () => this.props.onFavourite(item.id)} 
                   favourite={this.props.favourites.includes(item.id)}
                 />
-                <Text style={[styles.boldLabel, {width: 200, paddingTop: 5, textAlign: 'center'}]} numberOfLines={1}>{item.name}</Text>
+                <View style={{marginLeft: 20, marginRight: 40}}>
+                  <Text style={[styles.boldLabel, styles.titleText]} numberOfLines={1}>{item.name}</Text>
+                </View>
                 <View style={styles.row}>
                   <RestaurantDetailButton item={item} onFavourite={this.props.onFavourite} favourites={this.props.favourites} />
                   <RoundedButton onPress={() => this.props.handleChangeTab(1, item)}>View On Map</RoundedButton>

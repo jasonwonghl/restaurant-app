@@ -5,20 +5,6 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import RestaurantListScreen from '../Containers/RestaurantListScreen';
 import RestaurantLocator from './RestaurantLocator';
 
-// Styles
-import styles from './Styles/LaunchScreenStyles'
-
-const pageStyles = StyleSheet.create({
-  container: {
-    flex: 1
-  },  
-  page: {
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
-
 export default class LaunchScreen extends Component {
   constructor(props) {
     super(props);

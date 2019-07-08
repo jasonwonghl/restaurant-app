@@ -5,7 +5,8 @@ export default StyleSheet.create({
     position: 'absolute',
     right: 10,
     width: 30,
-    height:30
+    height:30,
+    zIndex: 10
   },
   buttonImage: {
     width: 30,

@@ -44,6 +44,22 @@ const ApplicationStyles = {
       ...Fonts.style.h2,
       fontSize: 14,
       color: Colors.text
+    },
+    fullWidthImage: {
+      width: '100%',
+      height: 200
+    },
+    fullWidthImagePlaceholder: {
+      width: '100%',
+      height: 200,
+      marginTop: 90,
+      backgroundColor: Colors.eggplant
+    },
+    closeButton: {
+      position: 'absolute',
+      paddingTop: 30,
+      paddingHorizontal: 10,
+      zIndex: 10
     }
   },
   darkLabelContainer: {

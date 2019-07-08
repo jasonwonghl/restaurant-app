@@ -158,9 +158,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRestaurants: nextPageToken => dispatch(fetchRestaurants(nextPageToken)),
     toggleFavourite: favourites => dispatch(toggleFavourite(favourites))
   }
 }
 
-export default connect(mapStateToProps)(RestaurantLocator)
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantLocator)
