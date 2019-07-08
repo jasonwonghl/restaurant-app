@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Modal, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import RestaurantDetailScreen from './RestaurantDetailScreen'
 import RestaurantListPlaceholder from '../Components/RestaurantListPlaceholder'
 
 // Redux
@@ -18,6 +19,14 @@ const ITEM_HEIGHT = 200;
 const numPlaceholders = 5;
 
 class RestaurantListScreen extends React.PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      showModal: false,
+      modalItem: null
+    }
+  }
+
   renderEmpty = () => <RestaurantListPlaceholder numPlaceholders={numPlaceholders} />
 
   isReady = false;
@@ -41,8 +50,12 @@ class RestaurantListScreen extends React.PureComponent {
     this.props.toggleFavourite(arr);
   }
 
+  toggleModal = (modalItem) => {
+    this.setState({ showModal: !this.state.showModal, modalItem })
+  }
+
   componentDidMount = () => {
-    this.props.fetchRestaurants(this.props.NextPageToken);
+    this.props.fetchRestaurants(this.props.nextPageToken);
   }
 
   render () {
@@ -51,7 +64,7 @@ class RestaurantListScreen extends React.PureComponent {
         <FlatList
           contentContainerStyle={styles.listContent}
           data={this.props.restaurantList}
-          renderItem={({ item }) => <RestaurantItem item={item} handleChangeTab={this.props.handleChangeTab} favourites={this.props.favourites} onFavourite={this.onFavourite} />}
+          renderItem={({ item }) => <RestaurantItem item={item} handleChangeTab={this.props.handleChangeTab} favourites={this.props.favourites} onFavourite={this.onFavourite} toggleModal={this.toggleModal} />}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
           ListEmptyComponent={this.renderEmpty}
@@ -63,6 +76,16 @@ class RestaurantListScreen extends React.PureComponent {
           removeClippedSubviews={true}
           scrollEventThrottle={16}
         />
+        <Modal
+          visible={this.state.showModal}
+          onRequestClose={this.toggleModal}>
+          <RestaurantDetailScreen
+              item={this.state.modalItem}
+              onFavourite={this.onFavourite}
+              favourites={this.props.favourites}
+              screenProps={{ toggle: this.toggleModal }}
+          />
+        </Modal>
       </View>
     )
   }

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { View, Text, Image } from 'react-native'
 import Secrets from 'react-native-config'
 import RoundedButton from '../../App/Components/RoundedButton'
-import RestaurantDetailButton from '../Components/RestaurantDetailButton'
 import FavouriteButton from '../Components/FavouriteButton'
 
 // Styles
@@ -26,12 +25,12 @@ export default class RestaurantItem extends PureComponent {
                   onFavourite={ () => this.props.onFavourite(item.id)} 
                   favourite={this.props.favourites.includes(item.id)}
                 />
-                <View style={{marginLeft: 20, marginRight: 40}}>
-                  <Text style={[styles.boldLabel, styles.titleText]} numberOfLines={1}>{item.name}</Text>
+                <View style={{marginLeft: 20, marginRight: 50}}>
+                  <Text style={[styles.boldLabel, styles.titleText]} numberOfLines={2}>{item.name}</Text>
                 </View>
                 <View style={styles.row}>
-                  <RestaurantDetailButton item={item} onFavourite={this.props.onFavourite} favourites={this.props.favourites} />
-                  <RoundedButton onPress={() => this.props.handleChangeTab(1, item)}>View On Map</RoundedButton>
+                  <RoundedButton onPress={() => this.props.toggleModal(item)}>Details</RoundedButton>
+                  <RoundedButton onPress={() => this.props.handleChangeTab(1, item)}>Map</RoundedButton>
                 </View>
               </View>
             </View>
