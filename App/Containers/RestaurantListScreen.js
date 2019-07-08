@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import Placeholder, { Line, Media } from "rn-placeholder";
+import RestaurantListPlaceholder from '../Components/RestaurantListPlaceholder'
 
 // Redux
 import { fetchRestaurants, toggleFavourite } from '../Redux/RestaurantsRedux'
@@ -9,85 +9,16 @@ import { fetchRestaurants, toggleFavourite } from '../Redux/RestaurantsRedux'
 // Components
 import RestaurantItem from '../Components/RestaurantItem'
 
-// More info here: https://facebook.github.io/react-native/docs/flatlist.html
-
 // Styles
 import styles from './Styles/RestaurantListStyle'
-import { Colors } from '../Themes'
 
 // Constants
 const onEndReachedThreshold = .7;
 const ITEM_HEIGHT = 200;
+const numPlaceholders = 5;
 
 class RestaurantListScreen extends React.PureComponent {
-  renderEmpty = () =>
-    <View>
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-
-      <Placeholder
-        isReady={this.isReady}
-        animation="fade"
-        renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
-      >
-        <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line style={{ backgroundColor: Colors.eggplant }} />
-        <Line width="30%" style={{ marginBottom: 20, backgroundColor: Colors.eggplant }} />
-      </Placeholder>
-    </View>
+  renderEmpty = () => <RestaurantListPlaceholder numPlaceholders={numPlaceholders} />
 
   isReady = false;
 
