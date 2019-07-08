@@ -14,6 +14,7 @@ class RestaurantListPlaceholder extends PureComponent {
           isReady={this.isReady}
           animation="fade"
           renderLeft={() => <Media style={{ width: 90, height: 90, marginHorizontal: 10,  backgroundColor: Colors.eggplant}} />}
+          key={i}
         >
           <Line width="70%" style={{ backgroundColor: Colors.eggplant }} />
           <Line style={{ backgroundColor: Colors.eggplant }} />
